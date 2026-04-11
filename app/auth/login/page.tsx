@@ -72,12 +72,9 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen grid grid-cols-2 max-lg:grid-cols-1">
 
-      {/* ── Colonne gauche ── */}
       <div className="bg-brand h-screen flex flex-col p-12 max-lg:hidden">
-        {/* Logo */}
         <LogoOnDark />
 
-        {/* Centre */}
         <div className="flex-1 flex flex-col justify-center">
           <h2 className="text-4xl font-black text-white leading-tight mb-4">
             Bienvenue sur<br />V2G PRO
@@ -101,18 +98,15 @@ export default function LoginPage() {
           </ul>
         </div>
 
-        {/* Footer */}
         <p className="text-xs text-white/40">© {new Date().getFullYear()} V2G Profit Tracker</p>
       </div>
 
-      {/* ── Colonne droite ── */}
       <div className="bg-white h-screen flex items-center justify-center">
         <div className="max-w-sm w-full px-8">
 
           <h1 className="text-2xl font-black text-gray-900 mb-1">Connexion</h1>
           <p className="text-sm text-gray-400 mb-8">Accédez à votre tableau de bord ROI.</p>
 
-          {/* Google */}
           <button
             type="button"
             onClick={handleGoogleLogin}
@@ -123,14 +117,12 @@ export default function LoginPage() {
             {googleLoading ? 'Redirection...' : 'Continuer avec Google'}
           </button>
 
-          {/* Séparateur */}
           <div className="flex items-center gap-3 mb-6">
             <div className="flex-1 h-px bg-gray-100" />
             <span className="text-[12px] font-semibold text-gray-400 uppercase tracking-widest">ou</span>
             <div className="flex-1 h-px bg-gray-100" />
           </div>
 
-          {/* Formulaire */}
           <form onSubmit={handleLogin} className="flex flex-col gap-5">
             <div>
               <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Email</label>

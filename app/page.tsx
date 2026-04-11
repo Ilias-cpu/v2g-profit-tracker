@@ -29,10 +29,8 @@ export default function HomePage() {
     <main>
       <Navbar />
 
-      {/* ── HERO ── */}
       <section className="max-w-[900px] mx-auto px-12 pt-20 pb-16 flex flex-col items-center text-center max-lg:px-6">
 
-        {/* Badge */}
         <div className="inline-flex items-center gap-1.5 bg-white border border-brand-mid text-brand text-[11px] font-bold tracking-widest uppercase px-3.5 py-1.5 rounded-full mb-6 mx-auto">
           <span className="w-1.5 h-1.5 bg-brand rounded-full" />
           OCPP 2.0.1 &amp; ISO 15118 SUPPORTÉS
@@ -46,7 +44,6 @@ export default function HomePage() {
           <span className="text-brand">Calculez, Décidez,<br />Rentabilisez.</span>
         </h1>
 
-        {/* CTA */}
         <div
           className="mt-9 flex gap-3.5 items-center justify-center"
           style={{ animation: 'fade-up 0.6s ease 0.2s both' }}
@@ -65,7 +62,6 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Trust */}
         <div
           className="mt-8 flex items-center gap-3.5 justify-center"
           style={{ animation: 'fade-up 0.6s ease 0.35s both' }}
@@ -86,7 +82,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Perks */}
         <div className="mt-7 flex gap-7 justify-center">
           {[
             '5 simulations offertes',
@@ -103,12 +98,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── HERO CARDS ── */}
       <section className="max-w-[1100px] mx-auto px-12 pb-16 max-lg:px-6">
         <HeroCards />
       </section>
 
-      {/* ── FEATURES ── */}
       <section className="max-w-[1300px] mx-auto px-12 pb-20 grid grid-cols-3 gap-6 max-lg:grid-cols-1 max-lg:px-6">
         {[
           {

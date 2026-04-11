@@ -9,9 +9,7 @@ const font = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'V2G Profit Tracker – Simulateur ROI Vehicle-to-Grid',
-  description:
-    'Transformez les données de votre batterie en verdict financier immédiat. Calculez votre ROI V2G en moins de 30 secondes.',
+  title: 'V2G Tracker',
 }
 
 export default function RootLayout({

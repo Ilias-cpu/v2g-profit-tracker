@@ -1,9 +1,3 @@
--- ============================================================
--- V2G Profit Tracker – Migration initiale
--- À exécuter dans : Supabase Dashboard → SQL Editor
--- ============================================================
-
--- Table des simulations ROI V2G
 create table if not exists public.simulations (
   id            uuid primary key default gen_random_uuid(),
   user_id       uuid references auth.users(id) on delete cascade not null,

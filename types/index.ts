@@ -1,4 +1,3 @@
-// ── Simulation V2G ────────────────────────────────────────
 export interface Simulation {
   id: string
   user_id: string
@@ -47,7 +46,6 @@ export interface SimulationResult {
   verdict: 'excellent' | 'bon' | 'moyen' | 'faible'
 }
 
-// ── Auth ──────────────────────────────────────────────────
 export interface UserProfile {
   id: string
   email: string

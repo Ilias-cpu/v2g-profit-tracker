@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 
-// ── Types ──────────────────────────────────────────────────────────────────────
 interface FormState {
   battery_kwh:    number
   battery_health: number
@@ -16,7 +15,6 @@ interface FormState {
   region:         string
 }
 
-// ── Static data ────────────────────────────────────────────────────────────────
 const STEPS = ["Vue d'ensemble", 'Localisation', 'Véhicule', 'Simulation', 'Résultats']
 
 const BRANDS = ['Tesla', 'Renault', 'Volkswagen', 'Peugeot', 'BMW', 'Hyundai', 'Kia', 'Audi']
@@ -79,7 +77,6 @@ const REGION_TARIFS: Record<string, { buy: number; sell: number }> = {
 
 const REGIONS = Object.keys(REGION_TARIFS)
 
-// ── Shared styles ──────────────────────────────────────────────────────────────
 const inputCls     = 'w-full border border-gray-200 rounded-[10px] px-4 py-3 text-[15px] outline-none focus:border-brand focus:ring-2 focus:ring-brand-light transition'
 const labelCls     = 'block text-[13px] font-bold text-gray-700 mb-1.5'
 const pillActive   = 'border-2 border-brand bg-brand-light text-brand font-semibold text-[14px] px-4 py-3 rounded-[10px] transition-all text-left'
@@ -87,7 +84,6 @@ const pillIdle     = 'border-2 border-gray-200 bg-white text-gray-700 font-semib
 const regionActive = 'border-2 border-brand bg-brand-light text-brand text-[13px] font-semibold py-3 px-4 rounded-[10px] transition-all text-left'
 const regionIdle   = 'border-2 border-gray-200 bg-white text-gray-700 text-[13px] font-semibold py-3 px-4 rounded-[10px] hover:border-brand/40 transition-all text-left'
 
-// ── SVG Icons ──────────────────────────────────────────────────────────────────
 function IconBolt() {
   return (
     <svg viewBox="0 0 24 24" fill="none" width="22" height="22" stroke="currentColor" strokeWidth="2">
@@ -121,7 +117,6 @@ function IconCheck() {
   )
 }
 
-// ── Component ──────────────────────────────────────────────────────────────────
 export default function DashboardTabs() {
   const [activeStep,    setActiveStep]    = useState(0)
   const [showAdvanced,  setShowAdvanced]  = useState(false)
@@ -158,7 +153,6 @@ export default function DashboardTabs() {
     activeStep === 2 ? !!form.ev_model :
     true
 
-  // ── Calculations ────────────────────────────────────────────────────────────
   const diff = form.tarif_sell - form.tarif_buy
   const base = diff > 0 && form.v2g_hours > 0 && form.battery_kwh > 0
   const annual_revenue = base
@@ -171,7 +165,6 @@ export default function DashboardTabs() {
     ? Math.round(form.v2g_hours * 0.15 * 10) / 10
     : 0
 
-  // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <div>
       {/* ── Stepper ── */}
