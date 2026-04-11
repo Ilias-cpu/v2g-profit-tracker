@@ -1,0 +1,35 @@
+{
+  "regions": [
+    "Auvergne-Rhône-Alpes",
+    "Bretagne",
+    "Grand Est",
+    "Hauts-de-France",
+    "Normandie",
+    "Nouvelle-Aquitaine",
+    "Occitanie",
+    "PACA",
+    "Pays de la Loire",
+    "Île-de-France"
+  ],
+  "logements": [
+    "appartement",
+    "maison"
+  ],
+  "labels": [
+    "moyen",
+    "non_rentable",
+    "rentable"
+  ],
+  "features": [
+    "region_enc",
+    "capacite_kwh",
+    "sante_pct",
+    "tarif_achat",
+    "tarif_revente",
+    "km_quotidiens",
+    "heures_v2g",
+    "recharge_domicile",
+    "logement_enc",
+    "v2g_compatible"
+  ]
+}

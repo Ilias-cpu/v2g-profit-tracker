@@ -1,25 +1,22 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 
-const font = Plus_Jakarta_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-jakarta',
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-inter',
 })
 
 export const metadata: Metadata = {
   title: 'V2G Tracker',
+  description: 'Simulateur ROI Vehicle-to-Grid',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={font.variable}>
-      <body className="font-sans bg-bg antialiased">{children}</body>
+    <html lang="fr" className={inter.variable}>
+      <body style={{fontFamily: 'var(--font-inter), sans-serif', margin: 0}}>{children}</body>
     </html>
   )
 }

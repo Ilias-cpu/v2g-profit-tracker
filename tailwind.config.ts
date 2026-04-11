@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'sans-serif'],
+        sans: ['var(--font-inter)', 'sans-serif'],
       },
       colors: {
         brand: {
@@ -18,7 +18,7 @@ const config: Config = {
           light:   '#e8f0fe',
           mid:     '#d0e3ff',
         },
-        bg: '#eef4ff',
+        bg: '#fafafa',
       },
       boxShadow: {
         card:    '0 4px 24px rgba(26,111,244,0.10)',

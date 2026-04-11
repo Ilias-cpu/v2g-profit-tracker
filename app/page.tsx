@@ -1,140 +1,88 @@
-import Link from 'next/link'
 import Navbar from '@/components/layout/Navbar'
-import HeroCards from '@/components/ui/HeroCards'
-
-const IconBolt = () => (
-  <svg viewBox="0 0 24 24" fill="none" width="22" height="22" stroke="currentColor" strokeWidth="2">
-    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-  </svg>
-)
-
-const IconPin = () => (
-  <svg viewBox="0 0 24 24" fill="none" width="22" height="22" stroke="currentColor" strokeWidth="2">
-    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-    <circle cx="12" cy="9" r="2.5"/>
-  </svg>
-)
-
-const IconBattery = () => (
-  <svg viewBox="0 0 24 24" fill="none" width="22" height="22" stroke="currentColor" strokeWidth="2">
-    <rect x="2" y="7" width="18" height="10" rx="2"/>
-    <path d="M22 11v2"/>
-    <path d="M6 11h6"/>
-    <path d="M9 8v6"/>
-  </svg>
-)
 
 export default function HomePage() {
   return (
-    <main>
+    <div style={{minHeight:'100vh', background:'linear-gradient(160deg, #dce8ff 0%, #eef4ff 60%, #e8f0ff 100%)', fontFamily:'Plus Jakarta Sans, sans-serif'}}>
       <Navbar />
 
-      <section className="max-w-[900px] mx-auto px-12 pt-20 pb-16 flex flex-col items-center text-center max-lg:px-6">
+      <main style={{display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', padding:'60px 24px 0'}}>
 
-        <div className="inline-flex items-center gap-1.5 bg-white border border-brand-mid text-brand text-[11px] font-bold tracking-widest uppercase px-3.5 py-1.5 rounded-full mb-6 mx-auto">
-          <span className="w-1.5 h-1.5 bg-brand rounded-full" />
-          OCPP 2.0.1 &amp; ISO 15118 SUPPORTÉS
+        <div style={{background:'#eef2ff', color:'#1a6ff4', fontSize:'12px', fontWeight:700, padding:'6px 16px', borderRadius:'100px', marginBottom:'32px', letterSpacing:'0.02em', border:'1px solid #c7d7fe', display:'inline-block', animation:'fadeDown 0.5s ease both'}}>
+          Simulateur V2G gratuit
         </div>
 
-        <h1
-          className="text-[64px] font-black leading-[1.08] text-gray-900 max-lg:text-4xl"
-          style={{ animation: 'fade-up 0.6s ease both' }}
-        >
-          Simulateur V2G.<br />
-          <span className="text-brand">Calculez, Décidez,<br />Rentabilisez.</span>
+        <h1 style={{fontSize:'36px', fontWeight:900, lineHeight:1.15, margin:'0 0 16px', maxWidth:'680px', fontFamily:'var(--font-inter), sans-serif', letterSpacing:'-0.5px', whiteSpace:'nowrap', animation:'fadeUp 0.5s ease 0.1s both'}}>
+          <span style={{color:'#111827'}}>Votre véhicule électrique </span><span style={{color:'#1a6ff4'}}>sera-t-il rentable ?</span>
         </h1>
 
-        <div
-          className="mt-9 flex gap-3.5 items-center justify-center"
-          style={{ animation: 'fade-up 0.6s ease 0.2s both' }}
-        >
-          <Link
-            href="/auth/signup"
-            className="bg-brand hover:bg-brand-dark text-white px-6 py-3 rounded-[10px] text-[15px] font-bold transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(26,111,244,.35)]"
-          >
-            Lancer la simulation →
-          </Link>
-          <Link
-            href="#demo"
-            className="text-brand border-2 border-brand px-6 py-3 rounded-[10px] text-[15px] font-bold transition-all hover:bg-brand-light"
-          >
-            Voir une démo
-          </Link>
+        <p style={{fontSize:'15px', maxWidth:'420px', textAlign:'center', lineHeight:1.6, color:'#6b7280', margin:'0 auto 32px', animation:'fadeUp 0.5s ease 0.2s both'}} dangerouslySetInnerHTML={{__html: "Exploitez les données de milliers d'utilisateurs pour identifier<br/>votre potentiel retour sur investissement V2G en 30 secondes."}} />
+
+        <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'16px', animation:'fadeUp 0.5s ease 0.3s both'}}>
+          <input
+            type="email"
+            placeholder="nom@gmail.com"
+            style={{
+              width:'280px',
+              padding:'8px 16px',
+              border:'1.5px solid #e5e7eb',
+              borderRadius:'8px',
+              fontSize:'14px',
+              outline:'none',
+              fontFamily:'inherit'
+            }}
+          />
+          <button style={{
+            background:'#1a6ff4',
+            color:'white',
+            padding:'0 40px',
+            borderRadius:'8px',
+            fontSize:'14px',
+            fontWeight:700,
+            border:'none',
+            cursor:'pointer',
+            whiteSpace:'nowrap',
+            fontFamily:'inherit',
+            height:'36px'
+          }}>
+            Lancer ma simulation
+          </button>
         </div>
 
-        <div
-          className="mt-8 flex items-center gap-3.5 justify-center"
-          style={{ animation: 'fade-up 0.6s ease 0.35s both' }}
-        >
-          <div className="flex">
-            {['1','5','12'].map((i, idx) => (
-              <img
-                key={i}
-                src={`https://i.pravatar.cc/34?img=${i}`}
-                alt="avatar"
-                className={`w-8 h-8 rounded-full border-2 border-white object-cover ${idx !== 0 ? '-ml-2' : ''}`}
-              />
-            ))}
+        <p style={{fontSize:'12px', color:'#9ca3af', whiteSpace:'nowrap', animation:'fadeUp 0.5s ease 0.35s both'}}>
+          Inscrivez-vous pour accéder aux meilleures offres V2G correspondant à votre profil.
+        </p>
+
+        <div style={{marginTop:'48px', marginLeft:'auto', marginRight:'auto', width:'calc(100% - 80px)', maxWidth:'860px', background:'white', borderRadius:'16px', boxShadow:'0 4px 40px rgba(0,0,0,0.08)', overflow:'hidden', border:'1px solid #f0f0f0', animation:'scaleUp 0.7s ease 0.4s both'}}>
+          <div style={{height:'36px', background:'#f9fafb', borderBottom:'1px solid #f0f0f0', display:'flex', alignItems:'center', padding:'0 16px', gap:'6px'}}>
+            <div style={{width:'10px', height:'10px', borderRadius:'50%', background:'#ff5f57'}}/>
+            <div style={{width:'10px', height:'10px', borderRadius:'50%', background:'#febc2e'}}/>
+            <div style={{width:'10px', height:'10px', borderRadius:'50%', background:'#28c840'}}/>
           </div>
-          <div className="text-[13px] font-semibold text-gray-500 leading-snug">
-            <strong className="text-gray-900 block">+120 opérateurs réseau</strong>
-            font confiance à V2G Profit Tracker
-          </div>
+          <img
+            src="/Prototype-exemple-V2G.png"
+            alt="Dashboard V2G Tracker"
+            style={{width:'100%', display:'block'}}
+          />
         </div>
 
-        <div className="mt-7 flex gap-7 justify-center">
-          {[
-            '5 simulations offertes',
-            'Sans carte bancaire',
-            'Compatible tous véhicules EV',
-          ].map((p) => (
-            <div key={p} className="flex items-center gap-2 text-[13.5px] font-semibold text-gray-700">
-              <svg className="text-brand flex-shrink-0" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              {p}
-            </div>
-          ))}
+      </main>
+
+      <footer style={{
+        borderTop:'1px solid #e5e7eb',
+        marginTop:'80px',
+        padding:'24px 48px',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'space-between',
+        fontSize:'13px',
+        color:'#9ca3af'
+      }}>
+        <div style={{display:'flex', gap:'32px'}}>
+          <a href="/mentions-legales" style={{color:'#9ca3af', textDecoration:'none'}}>Mentions légales</a>
+          <a href="/confidentialite" style={{color:'#9ca3af', textDecoration:'none'}}>Politique de confidentialité</a>
         </div>
-      </section>
-
-      <section className="max-w-[1100px] mx-auto px-12 pb-16 max-lg:px-6">
-        <HeroCards />
-      </section>
-
-      <section className="max-w-[1300px] mx-auto px-12 pb-20 grid grid-cols-3 gap-6 max-lg:grid-cols-1 max-lg:px-6">
-        {[
-          {
-            icon: <IconBolt />,
-            bg: 'bg-brand-light',
-            iconColor: 'text-brand',
-            title: 'Simulation ultra-rapide',
-            desc: 'Entrez les specs de votre batterie, votre zone tarifaire et obtenez un verdict ROI complet en moins de 30 secondes. Zéro tableur, zéro prise de tête.',
-          },
-          {
-            icon: <IconPin />,
-            bg: 'bg-green-100',
-            iconColor: 'text-green-600',
-            title: 'Optimisation par localisation',
-            desc: "Notre moteur analyse les tarifs d'électricité en temps réel par région et identifie les créneaux V2G les plus rentables pour votre zone géographique.",
-          },
-          {
-            icon: <IconBattery />,
-            bg: 'bg-orange-50',
-            iconColor: 'text-orange-500',
-            title: 'Santé batterie préservée',
-            desc: "Algorithme de dégradation intégré : nous calculons le revenu net en tenant compte de l'usure réelle de votre batterie. Pas de mauvaise surprise.",
-          },
-        ].map((f) => (
-          <div key={f.title} className="bg-white rounded-xl2 p-8 shadow-card hover:shadow-card-lg transition-shadow animate-float-in">
-            <div className={`w-12 h-12 ${f.bg} rounded-[14px] flex items-center justify-center mb-5 ${f.iconColor}`}>
-              {f.icon}
-            </div>
-            <h3 className="text-lg font-extrabold text-gray-900 mb-2">{f.title}</h3>
-            <p className="text-sm leading-relaxed text-gray-500">{f.desc}</p>
-          </div>
-        ))}
-      </section>
-    </main>
+        <span>Copyright ©V2G Tracker 2026</span>
+      </footer>
+    </div>
   )
 }
