@@ -16,17 +16,5 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${origin}/auth/login?error=oauth_failed`)
   }
 
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    return NextResponse.redirect(`${origin}/auth/login`)
-  }
-
-  // Marque onboarding comme complété automatiquement (OAuth = pas besoin d'onboarding)
-  await supabase
-    .from('profils')
-    .update({ onboarding_complete: true })
-    .eq('id', user.id)
-
   return NextResponse.redirect(`${origin}/dashboard`)
 }
