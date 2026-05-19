@@ -22,15 +22,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${origin}/auth/login`)
   }
 
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('onboarding_completed')
+  // Marque onboarding comme complété automatiquement (OAuth = pas besoin d'onboarding)
+  await supabase
+    .from('profils')
+    .update({ onboarding_complete: true })
     .eq('id', user.id)
-    .single()
 
-  if (profile?.onboarding_completed) {
-    return NextResponse.redirect(`${origin}/dashboard`)
-  }
-
-  return NextResponse.redirect(`${origin}/onboarding`)
+  return NextResponse.redirect(`${origin}/dashboard`)
 }

@@ -57,15 +57,25 @@ export default function OnboardingPage() {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) { router.push('/auth/login'); return }
 
-    const { error } = await supabase.from('profiles').upsert({
-      id: user.id,
+    const { error: prefError } = await supabase.from('preferences_utilisateur').upsert({
+      user_id: user.id,
       install_type: installType,
       goal,
-      onboarding_completed: true,
     })
 
-    if (error) {
-      setError(error.message)
+    if (prefError) {
+      setError(prefError.message)
+      setLoading(false)
+      return
+    }
+
+    const { error: profileError } = await supabase
+      .from('profils')
+      .update({ onboarding_complete: true })
+      .eq('id', user.id)
+
+    if (profileError) {
+      setError(profileError.message)
       setLoading(false)
     } else {
       router.push('/dashboard')

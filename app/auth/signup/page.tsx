@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { LogoFull } from '@/components/ui/Logo'
 
 export default function SignupPage() {
   const supabase = createClient()
@@ -31,15 +32,8 @@ export default function SignupPage() {
   return (
     <div style={{minHeight:'100vh', background:'linear-gradient(160deg, #dce8ff 0%, #eef4ff 60%, #e8f0ff 100%)', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'24px', fontFamily:'Inter, sans-serif'}}>
 
-      <Link href="/" style={{textDecoration:'none', display:'flex', alignItems:'center', gap:'10px', marginBottom:'32px'}}>
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1a6ff4" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 7l6 5-6 5"/>
-          <path d="M20 7l-6 5 6 5"/>
-        </svg>
-        <span style={{display:'flex', alignItems:'baseline', gap:'4px', letterSpacing:'-0.03em'}}>
-          <span style={{fontSize:'18px', fontWeight:800, color:'#0f172a'}}>V2G</span>
-          <span style={{fontSize:'18px', fontWeight:600, color:'#0f172a'}}>Tracker</span>
-        </span>
+      <Link href="/" style={{textDecoration:'none', marginBottom:'32px'}}>
+        <LogoFull size={34} fontSize={18} />
       </Link>
 
       <div style={{background:'white', borderRadius:'16px', padding:'40px', width:'100%', maxWidth:'400px', boxShadow:'0 4px 24px rgba(26,111,244,0.08)'}}>

@@ -1,0 +1,109 @@
+from docx import Document
+from docx.shared import Pt, RGBColor
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
+import subprocess, sys
+
+# Installer python-docx si absent
+try:
+    from docx import Document
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "python-docx"])
+    from docx import Document
+
+doc = Document()
+
+TEAL = RGBColor(0x00, 0x78, 0x7C)
+WHITE = RGBColor(0xFF, 0xFF, 0xFF)
+LIGHT = RGBColor(0xF0, 0xF8, 0xF8)
+
+def set_cell_bg(cell, color_hex):
+    tc = cell._tc
+    tcPr = tc.get_or_add_tcPr()
+    shd = OxmlElement('w:shd')
+    shd.set(qn('w:val'), 'clear')
+    shd.set(qn('w:color'), 'auto')
+    shd.set(qn('w:fill'), color_hex)
+    tcPr.append(shd)
+
+def add_header_row(table, headers, bg='007B7F'):
+    row = table.rows[0]
+    for i, h in enumerate(headers):
+        cell = row.cells[i]
+        cell.text = h
+        set_cell_bg(cell, bg)
+        para = cell.paragraphs[0]
+        run = para.runs[0]
+        run.bold = True
+        run.font.color.rgb = WHITE
+        run.font.size = Pt(10)
+
+def add_data_row(table, values, shade=False):
+    row = table.add_row()
+    for i, v in enumerate(values):
+        cell = row.cells[i]
+        cell.text = v
+        if shade:
+            set_cell_bg(cell, 'F0F8F8')
+        para = cell.paragraphs[0]
+        run = para.runs[0]
+        run.font.size = Pt(9)
+
+# ── TERMES ──
+doc.add_heading('II. Glossaire', level=1)
+doc.add_heading('A. Termes', level=2)
+
+termes = [
+    ("Asservissement", "Système de contrôle en boucle fermée visant à maintenir une grandeur physique à une valeur de consigne malgré les perturbations."),
+    ("Boucle fermée", "Architecture de contrôle où la sortie du système est mesurée et comparée à la consigne pour calculer une correction."),
+    ("Boucle ouverte", "Architecture de contrôle sans retour de mesure : la commande est appliquée sans vérification du résultat."),
+    ("Consigne", "Valeur cible souhaitée pour la grandeur contrôlée (ex. : distance à parcourir, angle à atteindre)."),
+    ("Correcteur PID", "Correcteur numérique composé d'un terme Proportionnel, Intégral et Dérivé, utilisé pour réduire l'erreur entre la consigne et la mesure."),
+    ("Encodeur à effet Hall", "Capteur magnétique fixé sur un moteur qui génère des impulsions électriques proportionnelles à la rotation de l'axe."),
+    ("Erreur", "Différence entre la valeur de consigne et la valeur mesurée à un instant donné."),
+    ("Fréquence d'échantillonnage", "Nombre de fois par seconde où le système lit les capteurs et met à jour la commande."),
+    ("Impulsion (tick)", "Signal généré par l'encodeur à chaque fraction de tour de roue. Permet de mesurer la distance parcourue."),
+    ("Interruption (ISR)", "Routine logicielle déclenchée automatiquement par un événement matériel (ex. : front montant d'un encodeur), indépendamment du programme principal."),
+    ("Odométrie", "Estimation de la position d'un robot mobile à partir du comptage des impulsions d'encodeurs."),
+    ("PWM", "Modulation de largeur d'impulsion : technique permettant de contrôler la puissance fournie à un moteur en faisant varier le rapport cyclique d'un signal numérique."),
+    ("Rapport cyclique", "Proportion du temps pendant lequel le signal PWM est à l'état haut. Exprimé en pourcentage ou en valeur 0–255."),
+    ("Rétroaction", "Retour de l'information de sortie vers l'entrée du système pour correction. Synonyme de feedback."),
+]
+
+t1 = doc.add_table(rows=1, cols=2)
+t1.style = 'Table Grid'
+t1.columns[0].width = int(doc.sections[0].page_width * 0.28)
+add_header_row(t1, ['Terme', 'Définition'])
+for i, (terme, defi) in enumerate(termes):
+    add_data_row(t1, [terme, defi], shade=(i % 2 == 0))
+
+doc.add_paragraph()
+
+# ── ACRONYMES ──
+doc.add_heading('B. Acronymes', level=2)
+
+acronymes = [
+    ("API", "Access Point (Point d'accès)", "Mode Wi-Fi dans lequel l'ESP32 crée son propre réseau sans fil auquel l'ordinateur se connecte."),
+    ("CPR", "Counts Per Revolution", "Nombre d'impulsions générées par l'encodeur pour un tour complet de la roue."),
+    ("ESP32", "—", "Microcontrôleur avec Wi-Fi et Bluetooth intégré, utilisé comme unité de calcul du robot."),
+    ("GPIO", "General Purpose Input/Output", "Broche numérique configurable en entrée ou en sortie sur le microcontrôleur."),
+    ("HTTP", "HyperText Transfer Protocol", "Protocole utilisé pour envoyer les commandes depuis l'ordinateur vers le robot via Wi-Fi."),
+    ("I²C", "Inter-Integrated Circuit", "Protocole de communication série sur deux fils (SDA, SCL) pour lire l'IMU et le magnétomètre."),
+    ("IMU", "Inertial Measurement Unit", "Centrale inertielle mesurant accélérations et vitesses angulaires. Référence sur la carte : LSM6DS3."),
+    ("ISR", "Interrupt Service Routine", "Fonction exécutée automatiquement lors d'une interruption matérielle (ex. : front montant encodeur)."),
+    ("MAG", "Magnétomètre", "Capteur mesurant le champ magnétique terrestre pour déterminer l'orientation vers le Nord. Référence : LIS3MDL."),
+    ("PCB", "Printed Circuit Board", "Circuit imprimé. Désigne ici la carte Gyrobot sur laquelle sont soudés tous les composants."),
+    ("PID", "Proportionnel Intégral Dérivé", "Type de correcteur numérique utilisé pour l'asservissement en position et en cap du robot."),
+    ("PWM", "Pulse Width Modulation", "Signal numérique à fréquence fixe dont le rapport cyclique est modulé pour contrôler la vitesse des moteurs."),
+    ("SDA", "Serial Data", "Ligne de données du bus I²C."),
+    ("SCL", "Serial Clock", "Ligne d'horloge du bus I²C."),
+]
+
+t2 = doc.add_table(rows=1, cols=3)
+t2.style = 'Table Grid'
+add_header_row(t2, ['Acronyme', 'Signification', 'Explication'])
+for i, (acr, sig, exp) in enumerate(acronymes):
+    add_data_row(t2, [acr, sig, exp], shade=(i % 2 == 0))
+
+doc.save('glossaire_acronymes.docx')
+print("Fichier genere : glossaire_acronymes.docx")
