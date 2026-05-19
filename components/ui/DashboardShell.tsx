@@ -452,8 +452,7 @@ export default function DashboardShell({ email }: { email: string }) {
           <div>
 
 
-            {active === 'simulation' && <DashboardTabs onNavigate={setActive} />}
-            {active === 'rentabilite' && <RentabilitePanel />}
+            {active === 'simulation' && <DashboardTabs onNavigate={(tab) => setActive(tab as NavItem)} />}            {active === 'rentabilite' && <RentabilitePanel />}
             {active !== 'simulation' && active !== 'rentabilite' && (
               <div style={{ background:'white', borderRadius:'16px', padding:'32px', border:'1px solid #e5e7eb', color:'#9ca3af', fontSize:'14px' }}>
                 {PAGE_TITLES[active]} — bientôt disponible
